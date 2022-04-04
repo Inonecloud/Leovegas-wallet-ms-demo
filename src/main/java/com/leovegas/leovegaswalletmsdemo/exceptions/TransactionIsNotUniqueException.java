@@ -1,7 +1,7 @@
-package com.leovegas.leovegaswalletmsdemo.Exceptions;
+package com.leovegas.leovegaswalletmsdemo.exceptions;
 
-public class TransactionIsNotUnique extends RuntimeException{
-    public TransactionIsNotUnique(String transactionId){
-        super("Transaction with id " + transactionId + " already exists" );
+public class TransactionIsNotUniqueException extends RuntimeException {
+    public TransactionIsNotUniqueException(String transactionId) {
+        super(transactionId);
     }
 }

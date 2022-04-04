@@ -1,2 +1,9 @@
-package com.leovegas.leovegaswalletmsdemo.Exceptions;public class PlayerNotFoundException {
+package com.leovegas.leovegaswalletmsdemo.exceptions;
+
+import java.util.Objects;
+
+public class PlayerNotFoundException extends RuntimeException {
+    public PlayerNotFoundException(long playerId){
+        super(Objects.toString(playerId, "NAN"));
+    }
 }

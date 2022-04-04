@@ -8,7 +8,7 @@ import java.util.Map;
 
 @Profile("DEV")
 @Component
-public class PlayerClientImpl implements PlayerClient {
+public class PlayerClientDevImpl implements PlayerClient {
     private final Map<Long, PlayerDto> players = Map.of(
             1L, new PlayerDto(1, "Simone", "Stoddard"),
             2L, new PlayerDto(2, "Cian", "Lowry"),

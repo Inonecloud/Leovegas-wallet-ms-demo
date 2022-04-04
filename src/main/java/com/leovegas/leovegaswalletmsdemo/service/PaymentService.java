@@ -3,7 +3,7 @@ package com.leovegas.leovegaswalletmsdemo.service;
 import com.leovegas.leovegaswalletmsdemo.service.dto.OperationRqDto;
 import com.leovegas.leovegaswalletmsdemo.service.dto.OperationRsDto;
 
-public interface OperationsService {
+public interface PaymentService {
     /**
      * Withdrawal per player
      *
