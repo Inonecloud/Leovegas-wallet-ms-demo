@@ -1,5 +1,8 @@
 
-# This is test assigment for LeoVegas
+# Test assigment for LeoVegas
+
+This application runs on port 8080 by default and host http://localhost 
+
 
 ## How to start this application
 This has stubbed players list which works with spring profile 'DEV'.
@@ -14,6 +17,9 @@ To run this application you should execute following commands <br>
 `mvn spring-boot:run -Dspring-boot.run.profiles=DEV`
 
 ### Via Docker
+`mvn clean install -Dspring.profiles.active=DEV`<br>
+`docker build -t leovegas/wallet-microservice .`<br>
+`docker run -p 8080:8080 leovegas/wallet-microservice -e "SPRING_PROFILES_ACTIVE=DEV" --name leovegas-wallet-ms:latest`
 
 ## Database
 This app uses H2 in memory database and migrations engine Flyway. 
