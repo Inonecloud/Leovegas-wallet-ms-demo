@@ -31,7 +31,7 @@ class PlayerBalanceServiceTest {
     private Wallet wallet;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         wallet = new Wallet();
         wallet.setId(1L);
         wallet.setPlayerId(1L);
@@ -46,13 +46,13 @@ class PlayerBalanceServiceTest {
         List<BalanceDto> result = playerBalanceService.getAllPlayersBalance();
 
         assertAll(
-                ()->assertFalse(result.isEmpty())
+                () -> assertFalse(result.isEmpty())
         );
     }
 
     @Test
-    void whenGetPlayerBalanceHasNoErrorsThenReturnedNameAndCurrentBalanceOfPlayer(){
-        Mockito.when(walletRepository.findAllByPlayerId(anyLong())).thenReturn(wallet);
+    void whenGetPlayerBalanceHasNoErrorsThenReturnedNameAndCurrentBalanceOfPlayer() {
+        Mockito.when(walletRepository.findByPlayerId(anyLong())).thenReturn(wallet);
 
         BalanceDto result = playerBalanceService.getPlayerBalance(1L);
 
@@ -64,14 +64,14 @@ class PlayerBalanceServiceTest {
     }
 
     @Test
-    void whenGetPlayerBalanceWalletNotFoundThenThrowsPlayerNotFoundException(){
-        Mockito.when(walletRepository.findAllByPlayerId(anyLong())).thenReturn(null);
+    void whenGetPlayerBalanceWalletNotFoundThenThrowsPlayerNotFoundException() {
+        Mockito.when(walletRepository.findByPlayerId(anyLong())).thenReturn(null);
 
         assertThrows(PlayerNotFoundException.class, () -> playerBalanceService.getPlayerBalance(1L));
     }
 
     @Test
-    void whenGetAllTransactionsByPlayerIdHasNoErrorsThenReturnListWithPlayersTransactions(){
+    void whenGetAllTransactionsByPlayerIdHasNoErrorsThenReturnListWithPlayersTransactions() {
         var transaction = new LeovegasTransaction();
         transaction.setWallet(wallet);
         transaction.setAmount(new BigDecimal(10));
@@ -80,7 +80,7 @@ class PlayerBalanceServiceTest {
 
         wallet.setLeovegasTransactions(List.of(transaction));
 
-        Mockito.when(walletRepository.findAllByPlayerId(anyLong())).thenReturn(wallet);
+        Mockito.when(walletRepository.findByPlayerId(anyLong())).thenReturn(wallet);
 
         List<TransactionHistoryDto> result = playerBalanceService.getAllTransactionsByPlayerId(1L);
 
@@ -94,8 +94,8 @@ class PlayerBalanceServiceTest {
     }
 
     @Test
-    void whenGetAllTransactionsByPlayerIdHasNoTransactionsThenReturnEmptyList(){
-        Mockito.when(walletRepository.findAllByPlayerId(anyLong())).thenReturn(wallet);
+    void whenGetAllTransactionsByPlayerIdHasNoTransactionsThenReturnEmptyList() {
+        Mockito.when(walletRepository.findByPlayerId(anyLong())).thenReturn(wallet);
 
         List<TransactionHistoryDto> result = playerBalanceService.getAllTransactionsByPlayerId(1L);
 
@@ -105,8 +105,8 @@ class PlayerBalanceServiceTest {
     }
 
     @Test
-    void whenGetAllTransactionsByPlayerIdWalletNotFoundThenThrowsPlayerNotFoundException(){
-        Mockito.when(walletRepository.findAllByPlayerId(anyLong())).thenReturn(null);
+    void whenGetAllTransactionsByPlayerIdWalletNotFoundThenThrowsPlayerNotFoundException() {
+        Mockito.when(walletRepository.findByPlayerId(anyLong())).thenReturn(null);
 
         assertThrows(PlayerNotFoundException.class, () -> playerBalanceService.getAllTransactionsByPlayerId(1L));
     }

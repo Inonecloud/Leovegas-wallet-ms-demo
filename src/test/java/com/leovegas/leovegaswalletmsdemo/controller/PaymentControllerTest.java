@@ -198,7 +198,7 @@ class PaymentControllerTest {
     }
 
     private void prepareTransactionToDatabase(String transactionId) {
-        final Wallet wallet = walletRepository.findAllByPlayerId(1L);
+        final Wallet wallet = walletRepository.findByPlayerId(1L);
 
         var transaction = new LeovegasTransaction();
         transaction.setId(transactionId);

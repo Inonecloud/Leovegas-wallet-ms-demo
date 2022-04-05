@@ -26,7 +26,7 @@ class WalletControllerTest {
     @Test
     void getPlayerCurrentBalanceIsSuccess() throws Exception {
         mockMvc.perform(get(BASE_URL)
-                .param("playerId", "1"))
+                        .param("playerId", "1"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.player").value("Simone Stoddard"))
@@ -44,7 +44,7 @@ class WalletControllerTest {
     }
 
     @Test
-    void  getPlayerCurrentBalanceWhenWalletNotFoundThenReturnedPlayerNotFoundError() throws Exception {
+    void getPlayerCurrentBalanceWhenWalletNotFoundThenReturnedPlayerNotFoundError() throws Exception {
         mockMvc.perform(get(BASE_URL)
                         .param("playerId", "10"))
                 .andDo(print())

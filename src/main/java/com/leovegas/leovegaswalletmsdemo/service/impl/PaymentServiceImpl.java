@@ -31,12 +31,12 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     @Transactional
     public OperationRsDto debit(OperationRqDto operationRqDto) {
-        checkTransactionUniqueness(operationRqDto);
         checkAmountValue(operationRqDto.getAmount());
+        checkTransactionUniqueness(operationRqDto);
 
         var wallet = getWalletOfPlayer(operationRqDto.getPlayerId());
 
-        final BigDecimal newBalance = wallet.getBalance().subtract(operationRqDto.getAmount().abs());
+        final BigDecimal newBalance = wallet.getBalance().subtract(operationRqDto.getAmount());
         if (newBalance.compareTo(BigDecimal.ZERO) < 0) {
             log.error("Not enough money on balance");
             throw new NotEnoughMoneyException();
@@ -52,11 +52,11 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     @Transactional
     public OperationRsDto credit(OperationRqDto operationRqDto) {
-        checkTransactionUniqueness(operationRqDto);
         checkAmountValue(operationRqDto.getAmount());
+        checkTransactionUniqueness(operationRqDto);
 
         var wallet = getWalletOfPlayer(operationRqDto.getPlayerId());
-        var newBalance = wallet.getBalance().add(operationRqDto.getAmount().abs());
+        var newBalance = wallet.getBalance().add(operationRqDto.getAmount());
         wallet.setBalance(newBalance);
 
         LeovegasTransaction transaction = TransactionMapper.toTransactionEntity(operationRqDto, TransactionType.CREDIT, wallet);
@@ -78,15 +78,15 @@ public class PaymentServiceImpl implements PaymentService {
         });
     }
 
-    private void checkAmountValue(BigDecimal amount){
-        if(amount.compareTo(BigDecimal.ZERO)<=0){
+    private void checkAmountValue(BigDecimal amount) {
+        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
             log.error(String.format("Amount equals zero, below zero or null. Amount value %s", amount.toString()));
             throw new IncorrectAmountValueException(amount);
         }
     }
 
     private Wallet getWalletOfPlayer(long playerId) {
-        var wallet = walletRepository.findAllByPlayerId(playerId);
+        var wallet = walletRepository.findByPlayerId(playerId);
 
         if (wallet == null) {
             log.error(String.format("Player with id %s not found", playerId));

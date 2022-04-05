@@ -38,7 +38,7 @@ class PaymentServiceTest {
         wallet.setLeovegasTransactions(Collections.emptyList());
 
         Mockito.when(transactionRepository.findById(anyString())).thenReturn(Optional.empty());
-        Mockito.when(walletRepository.findAllByPlayerId(anyLong())).thenReturn(wallet);
+        Mockito.when(walletRepository.findByPlayerId(anyLong())).thenReturn(wallet);
 
         final OperationRsDto result = paymentService.debit(operationRqDto);
 
@@ -63,7 +63,7 @@ class PaymentServiceTest {
         var operationRqDto = new OperationRqDto("1234", 1L, new BigDecimal(100));
 
         Mockito.when(transactionRepository.findById(anyString())).thenReturn(Optional.empty());
-        Mockito.when(walletRepository.findAllByPlayerId(anyLong())).thenReturn(null);
+        Mockito.when(walletRepository.findByPlayerId(anyLong())).thenReturn(null);
 
         assertThrows(PlayerNotFoundException.class, () -> paymentService.debit(operationRqDto));
     }
@@ -78,13 +78,13 @@ class PaymentServiceTest {
         wallet.setLeovegasTransactions(Collections.emptyList());
 
         Mockito.when(transactionRepository.findById(anyString())).thenReturn(Optional.empty());
-        Mockito.when(walletRepository.findAllByPlayerId(anyLong())).thenReturn(wallet);
+        Mockito.when(walletRepository.findByPlayerId(anyLong())).thenReturn(wallet);
 
         assertThrows(NotEnoughMoneyException.class, () -> paymentService.debit(operationRqDto));
     }
 
     @Test
-    void whenAmountIsNegativeInDebitOperationThenThrowsIncorrectAmountValueException(){
+    void whenAmountIsNegativeInDebitOperationThenThrowsIncorrectAmountValueException() {
         var operationRqDto = new OperationRqDto("1234", 1L, new BigDecimal(-10));
         var wallet = new Wallet();
         wallet.setId(1L);
@@ -93,13 +93,13 @@ class PaymentServiceTest {
         wallet.setLeovegasTransactions(Collections.emptyList());
 
         Mockito.when(transactionRepository.findById(anyString())).thenReturn(Optional.empty());
-        Mockito.when(walletRepository.findAllByPlayerId(anyLong())).thenReturn(wallet);
+        Mockito.when(walletRepository.findByPlayerId(anyLong())).thenReturn(wallet);
 
         assertThrows(IncorrectAmountValueException.class, () -> paymentService.debit(operationRqDto));
     }
 
     @Test
-    void whenAmountIsZeroInDebitOperationThenThrowsIncorrectAmountValueException(){
+    void whenAmountIsZeroInDebitOperationThenThrowsIncorrectAmountValueException() {
         var operationRqDto = new OperationRqDto("1234", 1L, new BigDecimal(0));
         var wallet = new Wallet();
         wallet.setId(1L);
@@ -108,7 +108,7 @@ class PaymentServiceTest {
         wallet.setLeovegasTransactions(Collections.emptyList());
 
         Mockito.when(transactionRepository.findById(anyString())).thenReturn(Optional.empty());
-        Mockito.when(walletRepository.findAllByPlayerId(anyLong())).thenReturn(wallet);
+        Mockito.when(walletRepository.findByPlayerId(anyLong())).thenReturn(wallet);
 
         assertThrows(IncorrectAmountValueException.class, () -> paymentService.debit(operationRqDto));
     }
@@ -123,7 +123,7 @@ class PaymentServiceTest {
         wallet.setLeovegasTransactions(Collections.emptyList());
 
         Mockito.when(transactionRepository.findById(anyString())).thenReturn(Optional.empty());
-        Mockito.when(walletRepository.findAllByPlayerId(anyLong())).thenReturn(wallet);
+        Mockito.when(walletRepository.findByPlayerId(anyLong())).thenReturn(wallet);
 
         final OperationRsDto result = paymentService.credit(operationRqDto);
 
@@ -148,13 +148,13 @@ class PaymentServiceTest {
         var operationRqDto = new OperationRqDto("1234", 1L, new BigDecimal(100));
 
         Mockito.when(transactionRepository.findById(anyString())).thenReturn(Optional.empty());
-        Mockito.when(walletRepository.findAllByPlayerId(anyLong())).thenReturn(null);
+        Mockito.when(walletRepository.findByPlayerId(anyLong())).thenReturn(null);
 
         assertThrows(PlayerNotFoundException.class, () -> paymentService.credit(operationRqDto));
     }
 
     @Test
-    void whenAmountIsNegativeInCreditOperationThenThrowsIncorrectAmountValueException(){
+    void whenAmountIsNegativeInCreditOperationThenThrowsIncorrectAmountValueException() {
         var operationRqDto = new OperationRqDto("1234", 1L, new BigDecimal(-10));
         var wallet = new Wallet();
         wallet.setId(1L);
@@ -163,13 +163,13 @@ class PaymentServiceTest {
         wallet.setLeovegasTransactions(Collections.emptyList());
 
         Mockito.when(transactionRepository.findById(anyString())).thenReturn(Optional.empty());
-        Mockito.when(walletRepository.findAllByPlayerId(anyLong())).thenReturn(wallet);
+        Mockito.when(walletRepository.findByPlayerId(anyLong())).thenReturn(wallet);
 
         assertThrows(IncorrectAmountValueException.class, () -> paymentService.credit(operationRqDto));
     }
 
     @Test
-    void whenAmountIsZeroInCreditOperationThenThrowsIncorrectAmountValueException(){
+    void whenAmountIsZeroInCreditOperationThenThrowsIncorrectAmountValueException() {
         var operationRqDto = new OperationRqDto("1234", 1L, new BigDecimal(0));
         var wallet = new Wallet();
         wallet.setId(1L);
@@ -178,7 +178,7 @@ class PaymentServiceTest {
         wallet.setLeovegasTransactions(Collections.emptyList());
 
         Mockito.when(transactionRepository.findById(anyString())).thenReturn(Optional.empty());
-        Mockito.when(walletRepository.findAllByPlayerId(anyLong())).thenReturn(wallet);
+        Mockito.when(walletRepository.findByPlayerId(anyLong())).thenReturn(wallet);
 
         assertThrows(IncorrectAmountValueException.class, () -> paymentService.credit(operationRqDto));
     }

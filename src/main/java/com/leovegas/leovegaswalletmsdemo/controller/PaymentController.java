@@ -30,7 +30,7 @@ public class PaymentController {
             @ApiResponse(responseCode = "404", description = "Error if player not found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ExceptionDto.class)))
     })
     @PostMapping("/debit")
-    public OperationRsDto withdrawalFromPlayerBalance(@RequestBody @Validated OperationRqDto operationRqDto){
+    public OperationRsDto withdrawalFromPlayerBalance(@RequestBody @Validated OperationRqDto operationRqDto) {
         return paymentService.debit(operationRqDto);
     }
 
@@ -41,7 +41,7 @@ public class PaymentController {
             @ApiResponse(responseCode = "400", description = "Error in request data", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ExceptionDto.class))),
             @ApiResponse(responseCode = "404", description = "Error if player not found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ExceptionDto.class)))
     })
-    public OperationRsDto creditToPlayerBalance(@RequestBody @Validated OperationRqDto operationRqDto){
+    public OperationRsDto creditToPlayerBalance(@RequestBody @Validated OperationRqDto operationRqDto) {
         return paymentService.credit(operationRqDto);
     }
 }

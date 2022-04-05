@@ -5,10 +5,10 @@ import com.leovegas.leovegaswalletmsdemo.service.dto.BalanceDto;
 import com.leovegas.leovegaswalletmsdemo.service.dto.PlayerDto;
 
 public class BalanceMapper {
-    private BalanceMapper(){
+    private BalanceMapper() {
     }
 
-    public static BalanceDto toDto(Wallet entity, PlayerDto playerDto){
+    public static BalanceDto toDto(Wallet entity, PlayerDto playerDto) {
         String fullName = playerDto.getFirstName() + " " + playerDto.getLastName();
         return new BalanceDto(fullName, entity.getBalance());
     }

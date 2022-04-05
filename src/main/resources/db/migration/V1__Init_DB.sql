@@ -24,4 +24,4 @@ create table wallet
 );
 
 alter table leovegas_transaction
-    add constraint FKtfwlfspv2h4wcgc9rjd1658a6 foreign key (wallet_id) references wallet;
+    add constraint leovegas_transaction_wallet_id_fk foreign key (wallet_id) references wallet;

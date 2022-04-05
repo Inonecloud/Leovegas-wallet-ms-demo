@@ -12,9 +12,10 @@ import java.util.stream.Collectors;
 
 public class TransactionMapper {
 
-    private TransactionMapper(){}
+    private TransactionMapper() {
+    }
 
-    public static TransactionHistoryDto toDto(LeovegasTransaction entity){
+    public static TransactionHistoryDto toDto(LeovegasTransaction entity) {
         return TransactionHistoryDto.builder()
                 .transactionType(entity.getTransactionType().name())
                 .amount(entity.getAmount())
@@ -22,13 +23,13 @@ public class TransactionMapper {
                 .build();
     }
 
-    public static List<TransactionHistoryDto> toDto(List<LeovegasTransaction> entity){
+    public static List<TransactionHistoryDto> toDto(List<LeovegasTransaction> entity) {
         return entity.stream()
                 .map(TransactionMapper::toDto)
                 .collect(Collectors.toList());
     }
 
-    public static LeovegasTransaction toTransactionEntity(OperationRqDto dto, TransactionType transactionType, Wallet wallet){
+    public static LeovegasTransaction toTransactionEntity(OperationRqDto dto, TransactionType transactionType, Wallet wallet) {
         var entity = new LeovegasTransaction();
         entity.setId(dto.getTransactionId());
         entity.setTransactionType(transactionType);

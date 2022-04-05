@@ -1,12 +1,10 @@
 package com.leovegas.leovegaswalletmsdemo.domain;
 
 import lombok.*;
-import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.Objects;
 
 @Entity
 @Getter
@@ -14,6 +12,7 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class LeovegasTransaction {
     @Id
     private String id;
@@ -31,18 +30,5 @@ public class LeovegasTransaction {
 
     public TransactionType getTransactionType() {
         return transactionType;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        LeovegasTransaction that = (LeovegasTransaction) o;
-        return id != null && Objects.equals(id, that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
     }
 }

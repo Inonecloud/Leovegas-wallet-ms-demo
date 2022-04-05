@@ -42,13 +42,11 @@ public class PlayerBalanceServiceImpl implements PlayerBalanceService {
     @Override
     public List<TransactionHistoryDto> getAllTransactionsByPlayerId(long playerId) {
         var balance = getWallet(playerId);
-        return balance.getLeovegasTransactions().stream()
-                .map(TransactionMapper::toDto)
-                .collect(Collectors.toList());
+        return TransactionMapper.toDto(balance.getLeovegasTransactions());
     }
 
     private Wallet getWallet(long playerId) {
-        var wallet = walletRepository.findAllByPlayerId(playerId);
+        var wallet = walletRepository.findByPlayerId(playerId);
         if (wallet == null) {
             log.error(String.format("Player with id %d not found", playerId));
             throw new PlayerNotFoundException(playerId);
@@ -56,7 +54,7 @@ public class PlayerBalanceServiceImpl implements PlayerBalanceService {
         return wallet;
     }
 
-    private BalanceDto mapBalance(Wallet wallet){
+    private BalanceDto mapBalance(Wallet wallet) {
         var player = playerClient.getPlayerById(wallet.getPlayerId());
         return BalanceMapper.toDto(wallet, player);
     }

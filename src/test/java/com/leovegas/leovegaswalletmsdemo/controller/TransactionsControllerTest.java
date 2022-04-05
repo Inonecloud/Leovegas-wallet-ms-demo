@@ -44,7 +44,7 @@ class TransactionsControllerTest {
         transaction.setTransactionTime(Instant.now());
         transaction.setAmount(new BigDecimal(10));
         transaction.setTransactionType(TransactionType.CREDIT);
-        transaction.setWallet(walletRepository.findAllByPlayerId(1L));
+        transaction.setWallet(walletRepository.findByPlayerId(1L));
         transactionRepository.save(transaction);
 
         mockMvc.perform(get(BASE_URL+"/history")

@@ -13,7 +13,6 @@ public interface PaymentService {
     OperationRsDto debit(OperationRqDto operationRqDto);
 
     /**
-     *
      * @param operationRqDto
      * @return
      */
